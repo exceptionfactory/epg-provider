@@ -7,7 +7,7 @@ data class Event(
         val duration: String,
         val startTime: OffsetDateTime,
         val endTime: OffsetDateTime?,
-        val thumbnail: String,
+        val thumbnail: String?,
         val channelNo: String,
         val seriesId: String,
         val rating: String?,
