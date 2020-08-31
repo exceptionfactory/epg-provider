@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.exceptionfactory.epg"
-version = "0.0.3-SNAPSHOT"
+version = "0.0.3"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
