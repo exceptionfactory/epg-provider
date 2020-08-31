@@ -32,6 +32,9 @@ data class Programme(
 
         val premiere: Premiere?,
 
+        @JacksonXmlProperty(localName = "previously-shown")
+        val previouslyShown: PreviouslyShown?,
+
         val rating: Rating?,
 
         @JacksonXmlElementWrapper(useWrapping = false)

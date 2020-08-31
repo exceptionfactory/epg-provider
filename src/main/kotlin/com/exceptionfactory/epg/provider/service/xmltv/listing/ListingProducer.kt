@@ -10,6 +10,7 @@ import com.exceptionfactory.epg.provider.model.xmltv.Icon
 import com.exceptionfactory.epg.provider.model.xmltv.Length
 import com.exceptionfactory.epg.provider.model.xmltv.New
 import com.exceptionfactory.epg.provider.model.xmltv.Premiere
+import com.exceptionfactory.epg.provider.model.xmltv.PreviouslyShown
 import com.exceptionfactory.epg.provider.model.xmltv.Programme
 import com.exceptionfactory.epg.provider.model.xmltv.Rating
 import com.exceptionfactory.epg.provider.model.xmltv.SubTitle
@@ -43,7 +44,11 @@ class ListingProducer(
 
     private val filterPrefix = "filter-"
 
+    private val liveFlag = "Flag"
+
     private val newFlag = "New"
+
+    private val notPreviouslyShownFlags = listOf(liveFlag, newFlag)
 
     private val premiereFlag = "Premiere"
 
@@ -143,6 +148,7 @@ class ListingProducer(
         val categories = event.filter.map { filter -> Category(filter.removePrefix(filterPrefix)) }
         val new = if (event.flag.contains(newFlag)) New() else null
         val premiere = if (event.flag.contains(premiereFlag)) Premiere() else null
+        val previouslyShown = getPreviouslyShown(event)
         val iconSrc = UriComponentsBuilder.fromHttpUrl(iconUri).buildAndExpand(event.thumbnail).toUri().toString()
 
         return Programme(
@@ -156,6 +162,7 @@ class ListingProducer(
                 Icon(iconSrc),
                 new,
                 premiere,
+                previouslyShown,
                 rating,
                 categories,
                 getEpisodeNumbers(event.program)
@@ -184,5 +191,19 @@ class ListingProducer(
             episodeNumbers.add(EpisodeNum(seasonEpisodeNumber, EpisodeNumberSystem.SEASON_EPISODE.system))
         }
         return episodeNumbers
+    }
+
+    /**
+     * Get Previously Shown indicator when Event Flags do not contain New or Live status
+     *
+     * @param event Event Record
+     * @return Previously Shown or null when indicated
+     */
+    private fun getPreviouslyShown(event: Event): PreviouslyShown? {
+        return if (event.flag.none { flag -> notPreviouslyShownFlags.contains(flag) }) {
+            PreviouslyShown()
+        } else {
+            null
+        }
     }
 }
