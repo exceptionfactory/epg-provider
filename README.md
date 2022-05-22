@@ -1,5 +1,7 @@
 # Electronic Program Guide Provider
 
+[![build](https://github.com/exceptionfactory/epg-provider/actions/workflows/build.yml/badge.svg)](https://github.com/exceptionfactory/epg-provider/actions/workflows/build.yml)
+
 The Electronic Program Guide ([EPG](https://en.wikipedia.org/wiki/Electronic_program_guide))
 Provider is a web application that returns TV Listings formatted according to the [XMLTV](https://www.xmltv.org)
 specification.
