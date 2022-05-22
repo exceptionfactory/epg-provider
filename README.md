@@ -106,3 +106,11 @@ The following command can be used to build a container image for distribution or
 ```shell script
 ./gradlew bootBuildImage
 ```
+
+### Running
+
+The follow command can be used to run the application using Docker:
+
+```shell script
+docker run -d --name epg-provider -p 8080:8080 epg-provider:0.1.0-SNAPSHOT
+```
