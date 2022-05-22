@@ -4,6 +4,10 @@ The Electronic Program Guide ([EPG](https://en.wikipedia.org/wiki/Electronic_pro
 Provider is a web application that returns TV Listings formatted according to the [XMLTV](https://www.xmltv.org)
 specification.
 
+## Minimum Requirements
+
+- Java 17
+
 ## Listing Providers
 
 ### Zap2it
@@ -47,7 +51,7 @@ curl http://localhost:8080/listings/zap2it/USA/10001/DFLTE?duration=PT12H
 ##### Response
 
 ```
-HTTP 1/1 200
+HTTP/1.1 200
 Content-Type: application/xml
 ```
 ```xml
@@ -93,4 +97,10 @@ The following command can be used to build an executable JAR:
 
 ```shell script
 ./gradlew bootJar
+```
+
+The following command can be used to build a container image for distribution or execution:
+
+```shell script
+./gradlew bootBuildImage
 ```
